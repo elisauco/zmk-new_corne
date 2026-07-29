@@ -13,33 +13,7 @@
 
 &mt { flavor = "tap-preferred"; };
 
-&lt {
-};
-
 / {
-    behaviors {
-        td0: td0 {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "Shift/Caps Lock Tap Dance";
-            #binding-cells = <0>;
-            bindings = <&kp LEFT_SHIFT>, <&kp CAPS>;
-        };
-
-        rsr_vol: rsr_vol {
-            compatible = "zmk,behavior-runtime-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            tap-ms = <5>;
-            cw-binding = <&kp C_VOL_UP>;
-            ccw-binding = <&kp C_VOL_DN>;
-        };
-
-        rsr_trans: rsr_trans {
-            compatible = "zmk,behavior-runtime-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            tap-ms = <0>;
-        };
-    };
-
     combos {
         compatible = "zmk,combos";
 
@@ -49,8 +23,14 @@
         };
 
         caps {
-            bindings = <&kp LCTRL>;
+            bindings = <&kp CAPS>;
             key-positions = <14 26>;
+        };
+
+        game_mode_toggle {
+            bindings = <&tog 6>;
+            key-positions = <17 3 15>;
+            timeout-ms = <2000>;
         };
     };
 
@@ -58,7 +38,7 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            display-name = "QWERTY";
+            display-name = "ALPHA";
             bindings = <
 &none  &kp Q             &kp W        &kp E           &kp R           &kp T                      &none         &kp Y        &kp U            &kp I            &kp O        &kp P                 &none
 &mo 5  &mt LEFT_SHIFT A  &mt LCTRL S  &mt LEFT_GUI D  &mt LEFT_ALT F  &kp G               &none  &none  &none  &kp H        &mt RIGHT_ALT J  &mt RIGHT_GUI K  &mt RCTRL L  &mt RIGHT_SHIFT SEMI  &kp SQT
@@ -66,7 +46,7 @@
                                       &lt 3 ESCAPE    &lt 2 SPACE     &lt 1 TAB                                &lt 4 ENTER  &kp BACKSPACE    &kp DELETE
             >;
 
-            sensor-bindings = <&rsr_vol &rsr_trans>;
+            sensor-bindings = <&none>, <&none>;
         };
 
         Num {
@@ -87,6 +67,8 @@
 &none  &trans  &trans  &trans  &trans  &trans  &none           &none         &trans    &trans    &trans  &trans     &trans  &none
                        &trans  &trans  &trans                                &trans    &trans    &trans
             >;
+
+            label = "NAV";
         };
 
         func {
@@ -119,7 +101,29 @@
                                     &trans        &trans        &trans                                           &mkp RCLK       &mkp LCLK       &mkp MCLK
             >;
 
-            label = "MOUSE+MD";
+            label = "MS+MD";
+        };
+
+        game_mode {
+            bindings = <
+&none       &kp TAB         &kp Q  &kp W       &kp E      &kp R                  &none         &none      &kp I  &none  &none  &none  &none
+&kp ESCAPE  &kp LEFT_SHIFT  &kp A  &kp S       &kp D      &kp F           &none  &none  &none  &none      &kp J  &none  &none  &none  &none
+&none       &kp LCTRL       &kp Z  &kp X       &kp C      &none  &none           &none         &none      &kp M  &none  &none  &none  &none
+                                   &kp ESCAPE  &kp SPACE  &mo 7                                &kp ENTER  &none  &none
+            >;
+
+            label = "GAME";
+        };
+
+        game_mode_2 {
+            bindings = <
+&trans  &kp NUMBER_6  &kp NUMBER_7  &kp N8        &kp N9        &kp N0                        &none         &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5           &none  &none  &none  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans        &trans        &trans        &trans        &trans        &none           &none         &trans  &trans  &trans  &trans  &trans  &trans
+                                    &trans        &trans        &trans                                      &trans  &trans  &trans
+            >;
+
+            label = "GAME+";
         };
     };
 };

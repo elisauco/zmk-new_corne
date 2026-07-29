@@ -46,7 +46,6 @@
                                       &lt 3 ESCAPE    &lt 2 SPACE     &lt 1 TAB                                &lt 4 ENTER  &kp BACKSPACE    &kp DELETE
             >;
 
-            sensor-bindings = <&none>, <&none>;
         };
 
         Num {
